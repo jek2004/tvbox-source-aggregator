@@ -225,6 +225,7 @@ export function cleanEmptyEntries(config: TVBoxConfig): TVBoxConfig {
     doh: config.doh?.length || 0,
   };
 
+  // ↓↓↓ 注意这里：只声明一次 const sites ↓↓↓
   const sites = (config.sites || []).filter(s => s.key && s.api);
   const parses = (config.parses || []).filter(p => p.name && p.url);
   const lives = (config.lives || []).filter(l => (l.url || l.api));
@@ -243,8 +244,8 @@ export function cleanEmptyEntries(config: TVBoxConfig): TVBoxConfig {
       `${before.lives - lives.length} lives, ${before.doh - doh.length} doh`,
     );
   }
-typescript
-const sites = (config.sites || []).filter(s => s.key && s.api);
+
+  // 使用 ...config 保留所有原始属性，然后覆盖过滤后的数组
   return { ...config, sites, parses, lives, doh };
 }
 
