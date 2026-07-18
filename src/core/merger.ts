@@ -220,7 +220,8 @@ export function cleanEmptyEntries(config: TVBoxConfig): TVBoxConfig {
       `${before.lives - lives.length} lives, ${before.doh - doh.length} doh`,
     );
   }
-
+typescript
+const sites = (config.sites || []).filter(s => s.key && s.api);
   return { ...config, sites, parses, lives, doh };
 }
 
@@ -261,4 +262,16 @@ export function cleanLocalRefs(config: TVBoxConfig): TVBoxConfig {
   }
 
   return { ...config, sites, lives };
+}
+json
+{
+  "key": "Nostr",
+  "name": "Nostr｜推荐",
+  "type": 3,
+  "api": "csp_Nostr",
+  "searchable": 0,
+  "quickSearch": 0,
+  "filter": 0,
+  "homePage": "https://www.252035.xyz/xs/tvbox/nostr.html",
+  "jar": ""
 }
