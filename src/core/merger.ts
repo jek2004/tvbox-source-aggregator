@@ -140,7 +140,7 @@ export function mergeConfigs(sourcedConfigs: SourcedConfig[]): MergeResult {
       type: 3,
       api: "csp_Douban",
       searchable: 0,
-      homePage: "https://movie.douban.com/",  // 加入跳转地址
+      homePage: "https://www.252035.xyz/xs/tvbox/nostr.html",  // 加入跳转地址
       jar: ""                                 // 关掉自动分配爬虫
     });
   }
