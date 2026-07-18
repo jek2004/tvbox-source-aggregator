@@ -132,6 +132,29 @@ export function mergeConfigs(sourcedConfigs: SourcedConfig[]): MergeResult {
     flags: deduplicateStrings(allFlags),
   };
 
+  // 👇 将你的站点配置以 TypeScript 对象的形式，强行驶入 sites 数组中
+  // 注意：这里把双引号去掉了，并且键名现在符合 JS/TS 规范
+  const hasNostr = merged.sites.some(s => s.key === 'Nostr');
+  if (!hasNostr) {
+    merged.sites.push({
+      key: "Nostr",
+      name: "Nostr｜推荐",
+      type: 3,
+      api: "csp_Nostr",
+      searchable: 0,
+      quickSearch: 0,
+      filter: 0,
+      homePage: "https://www.252035.xyz/xs/tvbox/nostr.html",
+      jar: ""
+    });
+  }
+  // 👆 结束注入
+
+  // 设置全局 spider
+  if (globalSpider) {
+    merged.spider = globalSpiderFull || globalSpider;
+  }
+
   // 设置全局 spider
   if (globalSpider) {
     merged.spider = globalSpiderFull || globalSpider;
@@ -263,15 +286,4 @@ export function cleanLocalRefs(config: TVBoxConfig): TVBoxConfig {
 
   return { ...config, sites, lives };
 }
-json
-{
-  "key": "Nostr",
-  "name": "Nostr｜推荐",
-  "type": 3,
-  "api": "csp_Nostr",
-  "searchable": 0,
-  "quickSearch": 0,
-  "filter": 0,
-  "homePage": "https://www.252035.xyz/xs/tvbox/nostr.html",
-  "jar": ""
-}
+
