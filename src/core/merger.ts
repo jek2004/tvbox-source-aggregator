@@ -121,16 +121,6 @@ export function mergeConfigs(sourcedConfigs: SourcedConfig[]): MergeResult {
     }
   }
 
-  const merged: TVBoxConfig = {
-    sites: dedupedSites,
-    parses: deduplicateParses(allParses || []),
-    lives: deduplicateLives(allLives || []),
-    hosts: deduplicateHosts(allHosts),
-    rules: mergeRules(allRules || []),
-    doh: deduplicateDoh(allDoh || []),
-    ads: deduplicateStrings(allAds),
-    flags: deduplicateStrings(allFlags),
-  };
     const merged: TVBoxConfig = {
     sites: dedupedSites,
     parses: deduplicateParses(allParses || []),
