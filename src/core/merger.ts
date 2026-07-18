@@ -131,6 +131,19 @@ export function mergeConfigs(sourcedConfigs: SourcedConfig[]): MergeResult {
     ads: deduplicateStrings(allAds),
     flags: deduplicateStrings(allFlags),
   };
+    // 👇 强制注入 豆瓣 站点 (作为纯主页跳转)
+  const hasDouban = merged.sites.some(s => s.key === '豆瓣');
+  if (!hasDouban) {
+    merged.sites.push({
+      key: "豆瓣",
+      name: "豆瓣 • 首页",
+      type: 3,
+      api: "csp_Douban",
+      searchable: 0,
+      homePage: "https://movie.douban.com/",  // 加入跳转地址
+      jar: ""                                 // 关掉自动分配爬虫
+    });
+  }
 
   // 设置全局 spider
   if (globalSpider) {
